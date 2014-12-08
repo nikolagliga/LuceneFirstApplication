@@ -51,7 +51,7 @@ public class Indexer {
       document.add(contentField);
       document.add(fileNameField);
       document.add(filePathField);
-
+   
       return document;
    }   
 
@@ -73,7 +73,7 @@ public class Indexer {
             && file.canRead()
             && filter.accept(file)
          ){
-            indexFile(file);
+            indexFile(file);    
          }
       }
       return writer.numDocs();

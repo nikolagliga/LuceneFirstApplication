@@ -28,8 +28,12 @@ public class LuceneTester {
    public TopDocs search(String searchQuery) throws IOException, ParseException{
       Searcher searcher = new Searcher(indexDir);
       TopDocs hits = searcher.search(searchQuery);
-      
-      searcher.close();
+      for(ScoreDoc scoreDoc : hits.scoreDocs) {
+	         Document doc = searcher.getDocument(scoreDoc);
+	            System.out.println("File: "
+	            + doc.get(LuceneConstants.FILE_PATH));
+	      }
+		searcher.close();
       return hits;
-   }
+   }   
 }
