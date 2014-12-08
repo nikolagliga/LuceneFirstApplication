@@ -147,7 +147,8 @@ public class GlavniProzor extends JFrame {
 			//racunanje pogodaka i brzine vremena pretrage
 			long startTime = System.currentTimeMillis(); 			
 			TopDocs hits = tester.search(txtPretraga.getText());
-			long endTime = System.currentTimeMillis();		
+			long endTime = System.currentTimeMillis();
+			
 			JOptionPane.showMessageDialog(null, "Ukupno pronadjeno: " + hits.totalHits + ".\n Ukupno vreme pretrage: " + (endTime - startTime) + " ms.");
 		} catch(IOException e){
 			e.printStackTrace();
