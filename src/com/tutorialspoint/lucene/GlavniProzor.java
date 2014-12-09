@@ -134,6 +134,7 @@ public class GlavniProzor extends JFrame {
 		    for(ScoreDoc scoreDoc : hits.scoreDocs) {
 		      Document doc = tester.searcher.getDocument(scoreDoc);
 		      putanja += doc.get(LuceneConstants.FILE_PATH);
+		      putanja += "\n";
 		    }
 		  } catch (IOException e) {
 		    e.printStackTrace();
@@ -167,7 +168,7 @@ public class GlavniProzor extends JFrame {
 			TopDocs hits = tester.search(txtPretraga.getText());
 			long endTime = System.currentTimeMillis();
 			String putanja = getPutanja(hits);
-			JOptionPane.showMessageDialog(null, "Ukupno pronadjeno: " + hits.totalHits + ".\n Ukupno vreme pretrage: " + (endTime - startTime) + " ms." + ".\n Putanja: " + putanja );
+			JOptionPane.showMessageDialog(null, "Ukupno pronadjeno: " + hits.totalHits + ".\n Ukupno vreme pretrage: " + (endTime - startTime) + " ms." + "\n Putanje: \n " + putanja );
 		} catch(IOException e){
 			e.printStackTrace();
 		} catch(ParseException e){
