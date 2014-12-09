@@ -13,6 +13,8 @@ import javax.swing.JFileChooser;
 import javax.swing.JComponent;
 
 import org.apache.lucene.document.Document;
+import org.apache.lucene.index.CorruptIndexException;
+import org.apache.lucene.index.IndexDeletionPolicy;
 import org.apache.lucene.queryParser.ParseException;
 
 import java.io.*;
@@ -125,6 +127,24 @@ public class GlavniProzor extends JFrame {
 		glavniProzor.setVisible(true);
 	}
 	
+	private String getPutanja(TopDocs hits){
+		  String putanja = "" ;
+		 
+		  try{
+		    Searcher searcher = new Searcher(txtFolderPretrage.getText());
+		 
+		    for(ScoreDoc scoreDoc : hits.scoreDocs) {
+		      Document doc = searcher.getDocument(scoreDoc);
+		      putanja += doc.get(LuceneConstants.FILE_PATH);
+		    }
+		  } catch (IOException e) {
+		    e.printStackTrace();
+		  }
+		 
+		  return putanja;
+		 
+		}
+		
 	public void IzvrsiPretragu(){ 	//metoda za izvrsenje pretrage
 			//provera da li je prvo polje prazno
 		if (txtFolderPretrage.getText() == null || txtFolderPretrage.getText().isEmpty()){
@@ -148,14 +168,14 @@ public class GlavniProzor extends JFrame {
 			long startTime = System.currentTimeMillis(); 			
 			TopDocs hits = tester.search(txtPretraga.getText());
 			long endTime = System.currentTimeMillis();
-			
-			JOptionPane.showMessageDialog(null, "Ukupno pronadjeno: " + hits.totalHits + ".\n Ukupno vreme pretrage: " + (endTime - startTime) + " ms.");
+			String putanja = getPutanja(hits);
+			JOptionPane.showMessageDialog(null, "Ukupno pronadjeno: " + hits.totalHits + ".\n Ukupno vreme pretrage: " + (endTime - startTime) + " ms." + ".\n Putanja: " + putanja );
 		} catch(IOException e){
 			e.printStackTrace();
 		} catch(ParseException e){
 			e.printStackTrace();
 		}	
 		
-	}
+		}
 }	
 
