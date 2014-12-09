@@ -131,10 +131,8 @@ public class GlavniProzor extends JFrame {
 		  String putanja = "" ;
 		 
 		  try{
-		    Searcher searcher = new Searcher(txtFolderPretrage.getText());
-		 
 		    for(ScoreDoc scoreDoc : hits.scoreDocs) {
-		      Document doc = searcher.getDocument(scoreDoc);
+		      Document doc = tester.searcher.getDocument(scoreDoc);
 		      putanja += doc.get(LuceneConstants.FILE_PATH);
 		    }
 		  } catch (IOException e) {

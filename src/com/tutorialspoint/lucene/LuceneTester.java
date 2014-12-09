@@ -11,9 +11,10 @@ import org.apache.lucene.search.TopDocs;
 
 public class LuceneTester {
 	 
-   String indexDir = "D:\\Lucene\\Index";
+   String indexDir = "Index";
    String dataDir = "D:\\Lucene\\Data";
    Indexer indexer;
+   Searcher searcher;
 
    public void createIndex() throws IOException{
       indexer = new Indexer(indexDir);
@@ -28,7 +29,7 @@ public class LuceneTester {
    
 
    public TopDocs search(String searchQuery) throws IOException, ParseException{
-      Searcher searcher = new Searcher(indexDir);
+      searcher = new Searcher(indexDir);
       TopDocs hits = searcher.search(searchQuery);
      // for(ScoreDoc scoreDoc : hits.scoreDocs) {
 	   //      Document doc = searcher.getDocument(scoreDoc);
